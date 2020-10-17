@@ -2,12 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
+using UnityEngine.UI;
 using Random = UnityEngine.Random; //do random number pick
 
 public class CardPick : MonoBehaviour
 {
-    public TextMeshPro numText;
+    public Text numText;
     //Random num = new Random();
     // Start is called before the first frame update
     public void ButHit()

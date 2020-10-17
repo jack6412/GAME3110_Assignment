@@ -1,5 +1,5 @@
 sceneSetups:
-- path: E:/George Brown College/Sumester 5/GAME3023/Lab4/Assets/Scenes/Menu.unity
+- path: Assets/Scenes/PickNumber.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
