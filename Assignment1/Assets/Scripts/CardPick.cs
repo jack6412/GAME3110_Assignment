@@ -20,12 +20,28 @@ public class CardPick : MonoBehaviour
     bool didPlayerTakeDamage = false;
     void Start()
     {
+        //set text to 0
+        ListText.text = "0";
+        numText.text = "0";
         playerUI = (PlayerUI)FindObjectOfType(typeof(PlayerUI));
     }
     public void ButHit()
     {
-        //stor random number
-        num1.Add(RandomNumber(12));
+        
+        //Do place 2 card
+        if(max==1)
+        {
+            for(int i =0;i<2;i++)
+            {
+                //stor random number
+                num1.Add(RandomNumber(12));
+                //stroe the max number
+                max++;
+            }
+        }
+        else //already have 2 card
+            //stor random number
+            num1.Add(RandomNumber(12));
 
         //show information
         show(num1);
@@ -33,6 +49,12 @@ public class CardPick : MonoBehaviour
         //stroe the max number
         max++;
     }
+
+    public void ButStay()
+    {
+
+    }
+
     private int RandomNumber(int max)
     {
         int pick = Random.Range(1, max + 1);
@@ -41,9 +63,8 @@ public class CardPick : MonoBehaviour
 
     private void show(List<int> num)
     {
-        //clear the test to empty
+        //clear stxt
         ListText.text = "";
-
         //show the list of stroe number
         foreach (var x in num)
             ListText.text += x.ToString() + " ";
@@ -58,6 +79,7 @@ public class CardPick : MonoBehaviour
         didPlayerTakeDamage = true;
         yield return null;
     }
+    
     void CheckPlayerHealth()
     {
         // Convert string to int
@@ -72,6 +94,8 @@ public class CardPick : MonoBehaviour
 
         //didPlayerTakeDamage = false;
     }
+
+
     void Update()
     {
         CheckPlayerHealth();
