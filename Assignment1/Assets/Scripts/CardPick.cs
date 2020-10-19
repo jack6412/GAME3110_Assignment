@@ -16,63 +16,65 @@ public class CardPick : MonoBehaviour
 
     List<int> num1 = new List<int>();
     int max = 1,//do for check number max of list
-        total = 0;//sum up number
+        total = 0,//sum up number
+        HP = 3;
     int numberText;
-    PlayerUI playerUI;
 
-    bool Result;
-    bool didPlayerTakeDamage = false;
     void Start()
     {
         //set text to 0
         ListText.text = "0";
-        numText.text = "0";
-        playerUI = (PlayerUI)FindObjectOfType(typeof(PlayerUI));
+        numText.text = total.ToString();
+        Health.text = HP.ToString();
+
+        AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
     }
     public void ButHit()
     {
         //for AI term
-        AI.AI_Term();
-
-        //Do place 2 card
-        if (max==1)
+        //AI.AI_Term();
+        if(total<21)
         {
-            for(int i =0;i<2;i++)
+            //Do place 2 card
+            if (max==1)
             {
+                for(int i =0;i<2;i++)
+                {
+                    //stor random number
+                    num1.Add(RandomNumber(12));
+                    //stroe the max number
+                    max++;
+                }
+            }
+            else //already have 2 card
                 //stor random number
                 num1.Add(RandomNumber(12));
-                //stroe the max number
-                max++;
-            }
+
+            total = num1.Take(max).Sum();//add total number
+
+            //show information
+            show(num1);
+            //stroe the max number
+            max++;
         }
-        else //already have 2 card
-            //stor random number
-            num1.Add(RandomNumber(12));
-
-        //show information
-        show(num1);
-
-        //check sum up number over 21
-        if (total > 21)
+        else
         {
             //get damage
+            HP--;
 
-
+            //show information
+            show(num1);
             //show which side win
 
             //reset value
             //Reset();
         }
-        else
-            //stroe the max number
-            max++;
-        
 
     }
 
     public void ButStay()
     {
-
+        Reset();
     }
 
     private int RandomNumber(int max)
@@ -89,37 +91,10 @@ public class CardPick : MonoBehaviour
         foreach (var x in num)
             ListText.text += x.ToString() + " ";
 
-        total = num.Take(max).Sum();//add total number
         //show the sum up number
         numText.text = total.ToString();
-    }
 
-    IEnumerator TakeDamage()
-    {
-        playerUI.playerHealth -= 1;
-        didPlayerTakeDamage = true;
-        yield return null;
-    }
-    
-    void CheckPlayerHealth()
-    {
-        // Convert string to int
-        Result = int.TryParse(numText.text, out numberText);
-        //numberText = int.Parse(numText.text);
-
-        if (numberText > 21 && didPlayerTakeDamage == false)
-        {
-            num1.Clear();
-            StartCoroutine(TakeDamage());
-        }
-
-        //didPlayerTakeDamage = false;
-    }
-
-
-    void Update()
-    {
-        CheckPlayerHealth();
+        Health.text = HP.ToString();
     }
 
     //restart value
@@ -127,6 +102,8 @@ public class CardPick : MonoBehaviour
     {
         ListText.text = "0";
         numText.text = "0";
+        total = 0;
+        num1.Clear();
         max = 1;
     }
 }
