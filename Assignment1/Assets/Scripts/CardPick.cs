@@ -33,8 +33,6 @@ public class CardPick : MonoBehaviour
     {
         //for AI term
         //AI.AI_Term();
-        if(total<21)
-        {
             //Do place 2 card
             if (max==1)
             {
@@ -51,6 +49,8 @@ public class CardPick : MonoBehaviour
                 num1.Add(RandomNumber(12));
 
             total = num1.Take(max).Sum();//add total number
+        if(total<21)
+        {
 
             //show information
             show(num1);
