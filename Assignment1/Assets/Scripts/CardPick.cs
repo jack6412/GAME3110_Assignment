@@ -10,9 +10,13 @@ public class CardPick : MonoBehaviour
 {
     public Text numText;
     public Text ListText;
+    public Text Health;
+
+    AI_Player AI;
 
     List<int> num1 = new List<int>();
-    int max = 1;//do for check number max of list
+    int max = 1,//do for check number max of list
+        total = 0;//sum up number
     int numberText;
     PlayerUI playerUI;
 
@@ -27,9 +31,11 @@ public class CardPick : MonoBehaviour
     }
     public void ButHit()
     {
-        
+        //for AI term
+        AI.AI_Term();
+
         //Do place 2 card
-        if(max==1)
+        if (max==1)
         {
             for(int i =0;i<2;i++)
             {
@@ -46,8 +52,22 @@ public class CardPick : MonoBehaviour
         //show information
         show(num1);
 
-        //stroe the max number
-        max++;
+        //check sum up number over 21
+        if (total > 21)
+        {
+            //get damage
+
+
+            //show which side win
+
+            //reset value
+            //Reset();
+        }
+        else
+            //stroe the max number
+            max++;
+        
+
     }
 
     public void ButStay()
@@ -69,8 +89,9 @@ public class CardPick : MonoBehaviour
         foreach (var x in num)
             ListText.text += x.ToString() + " ";
 
+        total = num.Take(max).Sum();//add total number
         //show the sum up number
-        numText.text = num.Take(max).Sum().ToString();//add total number
+        numText.text = total.ToString();
     }
 
     IEnumerator TakeDamage()
@@ -86,7 +107,7 @@ public class CardPick : MonoBehaviour
         Result = int.TryParse(numText.text, out numberText);
         //numberText = int.Parse(numText.text);
 
-        if (numberText >= 21 && didPlayerTakeDamage == false)
+        if (numberText > 21 && didPlayerTakeDamage == false)
         {
             num1.Clear();
             StartCoroutine(TakeDamage());
@@ -99,5 +120,13 @@ public class CardPick : MonoBehaviour
     void Update()
     {
         CheckPlayerHealth();
+    }
+
+    //restart value
+    private void Reset()
+    {
+        ListText.text = "0";
+        numText.text = "0";
+        max = 1;
     }
 }
