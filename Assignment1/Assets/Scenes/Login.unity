@@ -160,7 +160,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -20}
+  m_AnchoredPosition: {x: 0, y: -15}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &75485885
@@ -236,7 +236,7 @@ GameObject:
   - component: {fileID: 212071111}
   - component: {fileID: 212071110}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: PasswordInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 266448955}
   - component: {fileID: 266448954}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: UserInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -522,7 +522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &302030034
 RectTransform:
   m_ObjectHideFlags: 0
@@ -540,7 +540,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -90}
-  m_SizeDelta: {x: 253, y: 23}
+  m_SizeDelta: {x: 350, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &302030035
 MonoBehaviour:
@@ -549,7 +549,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 302030033}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -575,9 +575,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'message
-
-'
+  m_Text: Message
 --- !u!222 &302030036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -599,7 +597,7 @@ GameObject:
   - component: {fileID: 375331629}
   - component: {fileID: 375331628}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: PasswordInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -825,6 +823,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Registration_Scream: {fileID: 520361319}
   Login_Scream: {fileID: 2108257621}
+  message: {fileID: 1654882724}
+  Message_Text: {fileID: 1654882726}
+  UserName: {fileID: 266448954}
+  Password: {fileID: 212071110}
+  Check_Password: {fileID: 613790027}
+  User: {fileID: 591326060}
+  Check: {fileID: 375331628}
+  L_message: {fileID: 302030033}
+  L_Message_Text: {fileID: 302030035}
 --- !u!1 &437447470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1263,7 @@ GameObject:
   - component: {fileID: 591326061}
   - component: {fileID: 591326060}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: UserInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,7 +1404,7 @@ GameObject:
   - component: {fileID: 613790028}
   - component: {fileID: 613790027}
   m_Layer: 5
-  m_Name: InputField
+  m_Name: CheckInput
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1606,7 +1613,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 640540593}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420788170}
+        m_TargetAssemblyTypeName: LogInScreap, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &640540593
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2241,7 +2260,7 @@ GameObject:
   - component: {fileID: 1057566285}
   - component: {fileID: 1057566284}
   m_Layer: 5
-  m_Name: But_Exit
+  m_Name: But_Return
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2312,7 +2331,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 420788170}
         m_TargetAssemblyTypeName: LogInScreap, Assembly-CSharp
-        m_MethodName: Login
+        m_MethodName: Return
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2430,7 +2449,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Exit
+  m_Text: 'Return
+
+'
 --- !u!222 &1096483818
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2557,7 +2578,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 290, y: 200}
+  m_SizeDelta: {x: 290, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1209649113
 MonoBehaviour:
@@ -2893,7 +2914,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 50}
+  m_AnchoredPosition: {x: 0, y: 70}
   m_SizeDelta: {x: 500, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1410674619
@@ -3349,7 +3370,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -90}
-  m_SizeDelta: {x: 253, y: 23}
+  m_SizeDelta: {x: 300, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1654882726
 MonoBehaviour:
@@ -3540,7 +3561,7 @@ GameObject:
   - component: {fileID: 1854125996}
   - component: {fileID: 1854125995}
   m_Layer: 5
-  m_Name: But_Confirm
+  m_Name: But_Login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3608,7 +3629,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1854125996}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420788170}
+        m_TargetAssemblyTypeName: LogInScreap, Assembly-CSharp
+        m_MethodName: Login
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1854125996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4323,7 +4356,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2054563574}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 420788170}
+        m_TargetAssemblyTypeName: LogInScreap, Assembly-CSharp
+        m_MethodName: confirm
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2054563574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4533,7 +4578,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Enter
+  m_Text: Login
 --- !u!222 &2131074030
 CanvasRenderer:
   m_ObjectHideFlags: 0
