@@ -12,11 +12,16 @@ public class CardPick : MonoBehaviour
     public Text ListText;
     public Text Health;
 
+    //For card place
+    public GameObject Card;
+    public GameObject PlayerArea;
+
+    bool setTwo = false;
+
+
     AI_Player AI;
 
-    List<int> num1 = new List<int>();
-    int max = 1,//do for check number max of list
-        total = 0,//sum up number
+    int total = 0,//sum up number
         HP = 3;
     int numberText;
 
@@ -29,47 +34,14 @@ public class CardPick : MonoBehaviour
 
         AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
     }
-    public void ButHit()
+
+    private void Update()
     {
-        //for AI term
-        //AI.AI_Term();
-            //Do place 2 card
-            if (max==1)
-            {
-                for(int i =0;i<2;i++)
-                {
-                    //stor random number
-                    num1.Add(RandomNumber(12));
-                    //stroe the max number
-                    max++;
-                }
-            }
-            else //already have 2 card
-                //stor random number
-                num1.Add(RandomNumber(12));
-
-            total = num1.Take(max).Sum();//add total number
-        if(total<21)
+        if(total>21)
         {
 
-            //show information
-            show(num1);
-            //stroe the max number
-            max++;
+            Debug.Log("Triger");
         }
-        else
-        {
-            //get damage
-            HP--;
-
-            //show information
-            show(num1);
-            //show which side win
-
-            //reset value
-            //Reset();
-        }
-
     }
 
     public void ButStay()
@@ -77,24 +49,10 @@ public class CardPick : MonoBehaviour
         Reset();
     }
 
-    private int RandomNumber(int max)
+    public int RandomNumber(int max)
     {
         int pick = Random.Range(1, max + 1);
         return pick;
-    }
-
-    private void show(List<int> num)
-    {
-        //clear stxt
-        ListText.text = "";
-        //show the list of stroe number
-        foreach (var x in num)
-            ListText.text += x.ToString() + " ";
-
-        //show the sum up number
-        numText.text = total.ToString();
-
-        Health.text = HP.ToString();
     }
 
     //restart value
@@ -103,7 +61,49 @@ public class CardPick : MonoBehaviour
         ListText.text = "0";
         numText.text = "0";
         total = 0;
-        num1.Clear();
-        max = 1;
+        setTwo = false;
+    }
+
+    public void ButHit2()
+    {
+        if (setTwo == false)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                numberText = RandomNumber(12);
+                total = total + numberText;
+                show2(numberText);
+            }
+
+            if (total == 21)
+            {
+                //instance
+                Debug.Log("You win");
+            }
+            else
+                setTwo = true;
+        }
+        else
+        {
+            if (total < 21)
+            {
+                numberText = RandomNumber(12);
+                total = total + numberText;
+                show2(numberText);
+            }
+        }
+        
+
+        //Do place 2 card
+
+        numText.text = total.ToString();
+
+    }
+
+    public void show2(int num)
+    {  
+        GameObject PlaceCard = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
+        PlaceCard.transform.SetParent(PlayerArea.transform, false);
+        //GetComponent<Card>().Number.text = num.ToString();
     }
 }

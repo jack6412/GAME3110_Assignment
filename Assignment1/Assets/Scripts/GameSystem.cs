@@ -39,7 +39,7 @@ public class GameSystem : MonoBehaviour
     IEnumerator SetupBattle()
     {
         hitBtn.SetActive(false);
-        Debug.Log("SETUP");
+        //Debug.Log("SETUP");
         yield return new WaitForSeconds(1f);
         state = GameState.PLAYERTURN;
         PlayerTurn();

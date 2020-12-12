@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LogInScreap : MonoBehaviour
 {
@@ -57,6 +58,7 @@ public class LogInScreap : MonoBehaviour
     {
         Registration_Scream.gameObject.SetActive(true);
         Login_Scream.gameObject.SetActive(false);
+        L_message.gameObject.SetActive(false);
     }
 
     public void Return()
@@ -88,10 +90,10 @@ public class LogInScreap : MonoBehaviour
                 L_Message_Text.text = "Please Enter your Password.";
             }
 
-            else if (Check.text == "1" && User.text == "jack")//check password is match
+            else if (Check.text == "1" && User.text == "jack")//check password and user name is match
             {
-                L_message.gameObject.SetActive(true);
-                L_Message_Text.text = "User Confirm.";
+                L_message.gameObject.SetActive(false);
+                SceneManager.LoadScene("PickNumber");
 
             }
             else

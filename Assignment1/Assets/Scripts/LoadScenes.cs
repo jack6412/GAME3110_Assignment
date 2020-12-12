@@ -5,14 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LoadScenes : MonoBehaviour
 {
-    public void LoadLevel()
+    public void LoginMenu()
     {
-        SceneManager.LoadScene("PickNumber");
-    }
-
-    public void LoadMainMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Login");
     }
     
     public void QuitGame()
