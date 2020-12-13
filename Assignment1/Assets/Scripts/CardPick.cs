@@ -9,11 +9,12 @@ using Random = UnityEngine.Random; //do random number pick
 public class CardPick : MonoBehaviour
 {
     public Text numText;
-    public Text Health;
+    public GameObject[] Health;
 
     //For card place
     public GameObject[] Card;
     public GameObject PlayerArea;
+    GameObject PlaceCard;
 
     bool setTwo = false;
 
@@ -27,11 +28,20 @@ public class CardPick : MonoBehaviour
     {
         //set text to 0
         numText.text = total.ToString();
-        Health.text = HP.ToString();
 
         AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
     }
 
+    private void Update()
+    {
+        //check health losing
+        if (HP == 2)
+            Health[2].gameObject.SetActive(false);
+        else if(HP == 1)
+            Health[1].gameObject.SetActive(false);
+        else if(HP==0)
+            Health[0].gameObject.SetActive(false);
+    }
 
     public void ButStay()
     {
@@ -42,11 +52,13 @@ public class CardPick : MonoBehaviour
         else if (total > 21)
         {
             Debug.Log("You lose");
+            HP -= 1;
         }
 
         Reset();
     }
 
+    //do random number
     public int RandomNumber()
     {
         int pick = Random.Range(1, 13);
@@ -56,6 +68,7 @@ public class CardPick : MonoBehaviour
     //restart value
     private void Reset()
     {
+        clearCard();
         numText.text = "0";
         total = 0;
         setTwo = false;
@@ -63,7 +76,8 @@ public class CardPick : MonoBehaviour
 
     public void ButHit2()
     {
-        if (setTwo == false)
+
+        if (setTwo == false)// for place two Card
         {
             for (int i = 0; i < 2; i++)
             {
@@ -72,6 +86,7 @@ public class CardPick : MonoBehaviour
                 show2(numberText);
             }
 
+            //Check if get 21 at begining
             if (total == 21)
             {
                 //instance
@@ -82,27 +97,34 @@ public class CardPick : MonoBehaviour
         }
         else
         {
+            //do place number
             numberText = RandomNumber();
             total = total + numberText;
             show2(numberText);
         }
 
-
-        //Do place 2 card
+        
         numText.text = total.ToString();
 
     }
 
+    //Card and place them
     private void show2(int num)
     {  
-        GameObject PlaceCard = Instantiate(Card[num-1], new Vector2(0, 0), Quaternion.identity);
+        PlaceCard = Instantiate(Card[num-1], new Vector2(0, 0), Quaternion.identity);
         PlaceCard.transform.SetParent(PlayerArea.transform, false);
-        
 
+        //Debug.Log(max);
     }
 
+    //clear card on table
     private void clearCard()
     {
+        var max = GameObject.FindGameObjectsWithTag("Card");
 
+        foreach(var a in max)
+        {
+            Destroy(a);
+        }
     }
 }

@@ -1300,7 +1300,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Main Menu
+  m_Text: Quit
 --- !u!222 &1295544504
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1398,7 +1398,7 @@ GameObject:
   - component: {fileID: 1338967087}
   - component: {fileID: 1338967086}
   m_Layer: 5
-  m_Name: Main Menu
+  m_Name: Quit Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1481,7 +1481,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1338967086}
         m_TargetAssemblyTypeName: LoadScenes, Assembly-CSharp
-        m_MethodName: LoadMainMenu
+        m_MethodName: QuitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1762,7 +1762,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numText: {fileID: 1096818496}
-  Health: {fileID: 0}
+  Health:
+  - {fileID: 75549985}
+  - {fileID: 1777969781}
+  - {fileID: 1297770627}
   Card:
   - {fileID: 263760121768271129, guid: 14a4214387cb1864e9ceafae426a1162, type: 3}
   - {fileID: 263760121768271129, guid: 0a2b403ad8a988f40b7881c050337c88, type: 3}
