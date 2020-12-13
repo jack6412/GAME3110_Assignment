@@ -19,6 +19,10 @@ public class CardPick : MonoBehaviour
     public GameObject WinUI;
     public Text WhoWinText;
 
+    //Message
+    public GameObject Message;
+    public Text Message_Text;
+
     //For card place
     public GameObject[] Card;
     public GameObject PlayerArea;
@@ -55,7 +59,10 @@ public class CardPick : MonoBehaviour
     private void Update()
     {
         if (Hit)
+        {
             OppontmentPlay();
+            Message.gameObject.SetActive(false);
+        }
 
         Hit = false;
         
@@ -235,14 +242,22 @@ public class CardPick : MonoBehaviour
         OpponentStayText.gameObject.SetActive(false);
 
         if (Playertotal == Opponenttotal || (Playertotal > 21 && Opponenttotal > 21))
+        {
+            Message.gameObject.SetActive(true);
+            Message_Text.text = "Drol";
             Debug.Log("Drol");
+        }
         else if ((Playertotal <= 21 && Playertotal > Opponenttotal) || Opponenttotal > 21)
         {
+            Message.gameObject.SetActive(true);
+            Message_Text.text = "You win";
             Debug.Log("You win");
             OpponentHP--;
         }
         else if (Playertotal > 21 || (Playertotal < Opponenttotal && Opponenttotal <= 21))
         {
+            Message.gameObject.SetActive(true);
+            Message_Text.text = "You lose";
             Debug.Log("You lose");
             PlayerHP--;
         }
