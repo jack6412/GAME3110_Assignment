@@ -8,8 +8,11 @@ using Random = UnityEngine.Random; //do random number pick
 
 public class CardPick : MonoBehaviour
 {
+
     public Text PlayerSum;
     public Text OpponentSum;
+    public GameObject PlayerStayText;
+    public GameObject OpponentStayText;
     public GameObject[] PlayerHealth;
     public GameObject[] OpponentHealth;
 
@@ -20,6 +23,7 @@ public class CardPick : MonoBehaviour
     GameObject Player_PlaceCard;
     GameObject Opponent_PlaceCard;
 
+    //situation booling
     bool PlayerSetTwo = false,
         OpponentSettTwo = false,
         PlayerStay = false,
@@ -56,10 +60,9 @@ public class CardPick : MonoBehaviour
 
     public void ButStay()
     {
-        Debug.Log("P: " + PlayerStay + " O: " + OpponentStay);
-
         Hit = true;
         PlayerStay = true;
+        PlayerStayText.gameObject.SetActive(true);
         if (PlayerStay == true && OpponentStay == true)
             Result();
 
@@ -206,7 +209,10 @@ public class CardPick : MonoBehaviour
                 OpponentShow(OpponentNum);
             }
             else
+            {
                 OpponentStay = true;
+                OpponentStayText.gameObject.SetActive(true);
+            }
         }
         
 
@@ -219,18 +225,21 @@ public class CardPick : MonoBehaviour
         PlayerStay = false;
         OpponentStay = false;
 
-        if (Playertotal <= 21 && Playertotal > Opponenttotal)
+        PlayerStayText.gameObject.SetActive(false);
+        OpponentStayText.gameObject.SetActive(false);
+
+        if (Playertotal == Opponenttotal || (Playertotal > 21 && Opponenttotal > 21))
+            Debug.Log("Drol");
+        else if ((Playertotal <= 21 && Playertotal > Opponenttotal) || Opponenttotal > 21)
         {
             Debug.Log("You win");
             OpponentHP--;
         }
-        else if (Playertotal > 21 || Playertotal < Opponenttotal)
+        else if (Playertotal > 21 || (Playertotal < Opponenttotal && Opponenttotal <= 21))
         {
             Debug.Log("You lose");
             PlayerHP--;
         }
-        else if (Playertotal == Opponenttotal || (Playertotal>21 && Opponenttotal>21))
-            Debug.Log("Drol");
 
         clearCard();
 
