@@ -216,6 +216,7 @@ RectTransform:
   - {fileID: 391846056}
   - {fileID: 1503120876}
   - {fileID: 1530184390}
+  - {fileID: 886791336}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -544,16 +545,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 886791335}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 165.37936}
-  m_LocalScale: {x: 0.94777346, y: 0.94777346, z: 0.94777346}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 2.4263003, y: 2.4263003, z: 2.4263003}
   m_Children:
   - {fileID: 2020569697}
-  m_Father: {fileID: 1503120876}
-  m_RootOrder: 1
+  m_Father: {fileID: 42725127}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -4.863739, y: -125.39142}
+  m_AnchoredPosition: {x: -0, y: -315.00006}
   m_SizeDelta: {x: 217, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &886791337
@@ -1027,7 +1028,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1179428934}
         m_TargetAssemblyTypeName: LoadScenes, Assembly-CSharp
-        m_MethodName: LoginMenu
+        m_MethodName: PlayerVsComputer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1400,7 +1401,7 @@ RectTransform:
   m_LocalScale: {x: 1.3974218, y: 1.3974218, z: 1.3974218}
   m_Children: []
   m_Father: {fileID: 1503120876}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1800,7 +1801,6 @@ Transform:
   m_LocalScale: {x: 2.56, y: 2.56, z: 2.56}
   m_Children:
   - {fileID: 1179428933}
-  - {fileID: 886791336}
   - {fileID: 1766431904}
   - {fileID: 1622348677}
   - {fileID: 1312780327}
@@ -1876,7 +1876,7 @@ RectTransform:
   m_Children:
   - {fileID: 1208839339}
   m_Father: {fileID: 1503120876}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2033,7 +2033,7 @@ RectTransform:
   m_Children:
   - {fileID: 2000029172}
   m_Father: {fileID: 1503120876}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2097,7 +2097,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1766431905}
         m_TargetAssemblyTypeName: LoadScenes, Assembly-CSharp
-        m_MethodName: LoginMenu
+        m_MethodName: PlayerVsComputer
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

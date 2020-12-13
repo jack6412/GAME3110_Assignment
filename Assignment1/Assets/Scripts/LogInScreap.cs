@@ -93,7 +93,7 @@ public class LogInScreap : MonoBehaviour
             else if (Check.text == "1" && User.text == "jack")//check password and user name is match
             {
                 L_message.gameObject.SetActive(false);
-                SceneManager.LoadScene("PickNumber");
+                SceneManager.LoadScene("MainMenu");
 
             }
             else

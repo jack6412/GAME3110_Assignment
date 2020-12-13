@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LoadScenes : MonoBehaviour
 {
-    public void LoginMenu()
+    public void PlayerVsComputer()
     {
-        SceneManager.LoadScene("Login");
+        SceneManager.LoadScene("PickNumber");
     }
     
     public void QuitGame()
