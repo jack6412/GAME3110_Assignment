@@ -8,54 +8,62 @@ using Random = UnityEngine.Random; //do random number pick
 
 public class CardPick : MonoBehaviour
 {
-    public Text numText;
-    public GameObject[] Health;
+    public Text PlayerSum;
+    public Text OpponentSum;
+    public GameObject[] PlayerHealth;
+    public GameObject[] OpponentHealth;
 
     //For card place
     public GameObject[] Card;
     public GameObject PlayerArea;
-    GameObject PlaceCard;
+    public GameObject OpponentArea;
+    GameObject Player_PlaceCard;
+    GameObject Opponent_PlaceCard;
 
-    bool setTwo = false;
+    bool PlayerSetTwo = false,
+        OpponentSettTwo = false,
+        PlayerStay = false,
+        OpponentStay = false,
+        Hit = false;
 
-    AI_Player AI;
+    //Player
+    int Playertotal = 0,
+        PlayerHP = 3;
+    //Opponent
+    int Opponenttotal = 0,//sum up number
+        OpponentHP = 3;
 
-    int total = 0,//sum up number
-        HP = 3;
-    int numberText;
+    int PlayerNum, OpponentNum;
 
     void Start()
     {
         //set text to 0
-        numText.text = total.ToString();
+        PlayerSum.text = Playertotal.ToString();
+        OpponentSum.text = Opponenttotal.ToString();
 
-        AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
+        //AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
     }
 
     private void Update()
     {
-        //check health losing
-        if (HP == 2)
-            Health[2].gameObject.SetActive(false);
-        else if(HP == 1)
-            Health[1].gameObject.SetActive(false);
-        else if(HP==0)
-            Health[0].gameObject.SetActive(false);
+        if (Hit)
+            OppontmentPlay();
+
+        Hit = false;
+        
+        HealthLose(PlayerHP, OpponentHP);
     }
 
     public void ButStay()
     {
-        if (total <= 21)
-        {
-            Debug.Log("You win");
-        }
-        else if (total > 21)
-        {
-            Debug.Log("You lose");
-            HP -= 1;
-        }
+        Debug.Log("P: " + PlayerStay + " O: " + OpponentStay);
 
-        Reset();
+        Hit = true;
+        PlayerStay = true;
+        if (PlayerStay == true && OpponentStay == true)
+            Result();
+
+        //Reset();
     }
 
     //do random number
@@ -68,51 +76,47 @@ public class CardPick : MonoBehaviour
     //restart value
     private void Reset()
     {
-        clearCard();
-        numText.text = "0";
-        total = 0;
-        setTwo = false;
+        ReviveHealth();
     }
 
     public void ButHit2()
     {
-
-        if (setTwo == false)// for place two Card
+        Hit = true;
+        if (PlayerSetTwo == false)// for place two Card
         {
             for (int i = 0; i < 2; i++)
             {
-                numberText = RandomNumber();
-                total = total + numberText;
-                show2(numberText);
+                PlayerNum = RandomNumber();
+                Playertotal = Playertotal + PlayerNum;
+                PlayerShow(PlayerNum);
             }
 
             //Check if get 21 at begining
-            if (total == 21)
+            if (Playertotal == 21)
             {
                 //instance
                 Debug.Log("You win");
             }
             else
-                setTwo = true;
+                PlayerSetTwo = true;
         }
         else
         {
             //do place number
-            numberText = RandomNumber();
-            total = total + numberText;
-            show2(numberText);
+            PlayerNum = RandomNumber();
+            Playertotal = Playertotal + PlayerNum;
+            PlayerShow(PlayerNum);
         }
 
-        
-        numText.text = total.ToString();
+        PlayerSum.text = Playertotal.ToString();
 
     }
 
     //Card and place them
-    private void show2(int num)
-    {  
-        PlaceCard = Instantiate(Card[num-1], new Vector2(0, 0), Quaternion.identity);
-        PlaceCard.transform.SetParent(PlayerArea.transform, false);
+    private void PlayerShow(int num)
+    {
+        Player_PlaceCard = Instantiate(Card[num-1], new Vector2(0, 0), Quaternion.identity);
+        Player_PlaceCard.transform.SetParent(PlayerArea.transform, false);
 
         //Debug.Log(max);
     }
@@ -126,5 +130,109 @@ public class CardPick : MonoBehaviour
         {
             Destroy(a);
         }
+
+        PlayerSetTwo = false;
+        OpponentSettTwo = false;
+
+        Playertotal = 0;
+        Opponenttotal = 0;
+        PlayerSum.text = "0";
+        OpponentSum.text = "0";
+
+        Hit = false;
+    }
+
+    private void OpponentShow(int num)
+    {
+        Opponent_PlaceCard = Instantiate(Card[num - 1], new Vector2(0, 0), Quaternion.identity);
+        Opponent_PlaceCard.transform.SetParent(OpponentArea.transform, false);
+    }
+
+    private void HealthLose(int P_HP, int O_HP)
+    {
+        //check PlayerHealth losing
+        if (P_HP == 2)
+            PlayerHealth[2].gameObject.SetActive(false);
+        else if (P_HP == 1)
+            PlayerHealth[1].gameObject.SetActive(false);
+        else if (P_HP == 0)
+            PlayerHealth[0].gameObject.SetActive(false);
+
+        //check PlayerHealth losing
+        if (O_HP == 2)
+            OpponentHealth[2].gameObject.SetActive(false);
+        else if (O_HP == 1)
+            OpponentHealth[1].gameObject.SetActive(false);
+        else if (O_HP == 0)
+            OpponentHealth[0].gameObject.SetActive(false);
+    }
+
+    private void ReviveHealth()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            PlayerHealth[i].gameObject.SetActive(true);
+            OpponentHealth[i].gameObject.SetActive(true);
+        }
+    }
+
+    private void OppontmentPlay()
+    {
+        if (OpponentSettTwo == false)// for place two Card
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                OpponentNum = RandomNumber();
+                Opponenttotal = Opponenttotal + OpponentNum;
+                OpponentShow(OpponentNum);
+            }
+
+            //Check if get 21 at begining
+            if (Opponenttotal == 21)
+            {
+                //instance
+                Debug.Log("You win");
+            }
+            else
+                OpponentSettTwo = true;
+        }
+        else
+        {
+            if (Opponenttotal < 15)
+            {
+                //do place number
+                OpponentNum = RandomNumber();
+                Opponenttotal = Opponenttotal + OpponentNum;
+                OpponentShow(OpponentNum);
+            }
+            else
+                OpponentStay = true;
+        }
+        
+
+
+        OpponentSum.text = Opponenttotal.ToString();
+    }
+
+    private void Result()
+    {
+        PlayerStay = false;
+        OpponentStay = false;
+
+        if (Playertotal <= 21 && Playertotal > Opponenttotal)
+        {
+            Debug.Log("You win");
+            OpponentHP--;
+        }
+        else if (Playertotal > 21 || Playertotal < Opponenttotal)
+        {
+            Debug.Log("You lose");
+            PlayerHP--;
+        }
+        else if (Playertotal == Opponenttotal || (Playertotal>21 && Opponenttotal>21))
+            Debug.Log("Drol");
+
+        clearCard();
+
     }
 }

@@ -12,7 +12,7 @@ public class AI_Player : MonoBehaviour
 {
     public Text numText;
     public Text ListText;
-    public Text Health;
+    public Text PlayerHealth;
 
     List<int> num = new List<int>();
     int max = 1,
@@ -26,7 +26,7 @@ public class AI_Player : MonoBehaviour
         ListText.text = "0";
         numText.text = "0";
 
-        Health.text = HP.ToString();
+        PlayerHealth.text = HP.ToString();
     }
 
     public void AI_Term()

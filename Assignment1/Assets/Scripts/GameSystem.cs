@@ -115,7 +115,7 @@ void PlayerTurn()
         numText.text = num.Take(max).Sum().ToString();//add total number
     }
 
-        private void show2(List<int> num)
+        private void PlayerShow(List<int> num)
     {
         //clear the test to empty
         AIListText.text = "";
@@ -130,12 +130,12 @@ void PlayerTurn()
 
      IEnumerator TakeDamage()
     {
-        playerUI.playerHealth -= 1;
+        playerUI.playerPlayerHealth -= 1;
         didPlayerTakeDamage = true;
         yield return null;
     }
 
-    void CheckPlayerHealth()
+    void CheckPlayerPlayerHealth()
     {
         // Convert string to int
         Result = int.TryParse(numText.text, out numberText);
@@ -151,7 +151,7 @@ void PlayerTurn()
     }
     void Update()
     {
-        //CheckPlayerHealth();
+        //CheckPlayerPlayerHealth();
     }
     IEnumerator EnemyTurn()
     {
@@ -160,7 +160,7 @@ void PlayerTurn()
         num2.Add(RandomNumber(12));
 
         //show information
-        show2(num2);
+        PlayerShow(num2);
 
         //stroe the max number
         max2++;

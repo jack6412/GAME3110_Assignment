@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerUI : MonoBehaviour
 {
 
-    public Text healthRemaining;
-    public int playerHealth = 3;
+    public Text PlayerHealthRemaining;
+    public int playerPlayerHealth = 3;
 
     CardPick cardPick;
 
@@ -18,7 +18,7 @@ public class PlayerUI : MonoBehaviour
 
     void Update()
     {
-        healthRemaining.text = "Health: " + playerHealth;
+        PlayerHealthRemaining.text = "PlayerHealth: " + playerPlayerHealth;
         //cardPick.numText.text;
     }
 }
