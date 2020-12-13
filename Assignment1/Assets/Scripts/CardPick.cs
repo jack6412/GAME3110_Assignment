@@ -8,13 +8,16 @@ using Random = UnityEngine.Random; //do random number pick
 
 public class CardPick : MonoBehaviour
 {
-
+    //For UI
     public Text PlayerSum;
     public Text OpponentSum;
     public GameObject PlayerStayText;
     public GameObject OpponentStayText;
     public GameObject[] PlayerHealth;
     public GameObject[] OpponentHealth;
+    public GameObject ButtonAction;
+    public GameObject WinUI;
+    public Text WhoWinText;
 
     //For card place
     public GameObject[] Card;
@@ -28,7 +31,8 @@ public class CardPick : MonoBehaviour
         OpponentSettTwo = false,
         PlayerStay = false,
         OpponentStay = false,
-        Hit = false;
+        Hit = false,
+        Winning = false;
 
     //Player
     int Playertotal = 0,
@@ -56,6 +60,9 @@ public class CardPick : MonoBehaviour
         Hit = false;
         
         HealthLose(PlayerHP, OpponentHP);
+
+        if (Winning == true && ButtonAction.activeSelf)
+            ReviveHealth();
     }
 
     public void ButStay()
@@ -74,12 +81,6 @@ public class CardPick : MonoBehaviour
     {
         int pick = Random.Range(1, 13);
         return pick;
-    }
-
-    //restart value
-    private void Reset()
-    {
-        ReviveHealth();
     }
 
     public void ButHit2()
@@ -177,6 +178,11 @@ public class CardPick : MonoBehaviour
             PlayerHealth[i].gameObject.SetActive(true);
             OpponentHealth[i].gameObject.SetActive(true);
         }
+
+        OpponentHP = 3;
+        PlayerHP = 3;
+
+        Winning = false;
     }
 
     private void OppontmentPlay()
@@ -239,6 +245,19 @@ public class CardPick : MonoBehaviour
         {
             Debug.Log("You lose");
             PlayerHP--;
+        }
+
+        //anyone lose health
+        if(OpponentHP == 0 || PlayerHP == 0)
+        {
+            Winning = true;
+            WinUI.gameObject.SetActive(true);
+            ButtonAction.gameObject.SetActive(false);
+
+            if (PlayerHP == 0)
+                WhoWinText.text = "Opponent Win!";
+            else if(OpponentHP == 0)
+                WhoWinText.text = "Player Win!";
         }
 
         clearCard();
