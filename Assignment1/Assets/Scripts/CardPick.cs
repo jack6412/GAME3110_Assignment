@@ -9,15 +9,13 @@ using Random = UnityEngine.Random; //do random number pick
 public class CardPick : MonoBehaviour
 {
     public Text numText;
-    public Text ListText;
     public Text Health;
 
     //For card place
-    public GameObject Card;
+    public GameObject[] Card;
     public GameObject PlayerArea;
 
     bool setTwo = false;
-
 
     AI_Player AI;
 
@@ -28,37 +26,36 @@ public class CardPick : MonoBehaviour
     void Start()
     {
         //set text to 0
-        ListText.text = "0";
         numText.text = total.ToString();
         Health.text = HP.ToString();
 
         AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
     }
 
-    private void Update()
-    {
-        if(total>21)
-        {
-
-            Debug.Log("Triger");
-        }
-    }
 
     public void ButStay()
     {
+        if (total <= 21)
+        {
+            Debug.Log("You win");
+        }
+        else if (total > 21)
+        {
+            Debug.Log("You lose");
+        }
+
         Reset();
     }
 
-    public int RandomNumber(int max)
+    public int RandomNumber()
     {
-        int pick = Random.Range(1, max + 1);
+        int pick = Random.Range(1, 13);
         return pick;
     }
 
     //restart value
     private void Reset()
     {
-        ListText.text = "0";
         numText.text = "0";
         total = 0;
         setTwo = false;
@@ -70,7 +67,7 @@ public class CardPick : MonoBehaviour
         {
             for (int i = 0; i < 2; i++)
             {
-                numberText = RandomNumber(12);
+                numberText = RandomNumber();
                 total = total + numberText;
                 show2(numberText);
             }
@@ -85,25 +82,27 @@ public class CardPick : MonoBehaviour
         }
         else
         {
-            if (total < 21)
-            {
-                numberText = RandomNumber(12);
-                total = total + numberText;
-                show2(numberText);
-            }
+            numberText = RandomNumber();
+            total = total + numberText;
+            show2(numberText);
         }
-        
+
 
         //Do place 2 card
-
         numText.text = total.ToString();
 
     }
 
-    public void show2(int num)
+    private void show2(int num)
     {  
-        GameObject PlaceCard = Instantiate(Card, new Vector2(0, 0), Quaternion.identity);
+        GameObject PlaceCard = Instantiate(Card[num-1], new Vector2(0, 0), Quaternion.identity);
         PlaceCard.transform.SetParent(PlayerArea.transform, false);
-        //GetComponent<Card>().Number.text = num.ToString();
+        
+
+    }
+
+    private void clearCard()
+    {
+
     }
 }
