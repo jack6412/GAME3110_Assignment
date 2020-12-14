@@ -10,6 +10,10 @@ public class LoadScenes : MonoBehaviour
         SceneManager.LoadScene("PickNumber");
     }
     
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
     public void QuitGame()
     {
         Application.Quit();

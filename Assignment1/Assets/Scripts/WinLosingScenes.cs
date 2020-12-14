@@ -13,6 +13,7 @@ public class WinLosingScenes : MonoBehaviour
     {
         WinUI.gameObject.SetActive(false);
         ButtonAction.gameObject.SetActive(true);
+        SceneManager.LoadScene("PickNumber");
     }
 
     public void ButtonQuit()

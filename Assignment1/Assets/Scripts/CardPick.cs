@@ -36,7 +36,9 @@ public class CardPick : MonoBehaviour
         PlayerStay = false,
         OpponentStay = false,
         Hit = false,
-        Winning = false;
+        Winning = false,
+        didPlayerWin = false,
+        didPlayerLose = false;
 
     //Player
     int Playertotal = 0,
@@ -47,12 +49,17 @@ public class CardPick : MonoBehaviour
 
     int PlayerNum, OpponentNum;
 
+    UserProfile userprofile;
+    GlobalControl global;
+
     void Start()
     {
         //set text to 0
         PlayerSum.text = Playertotal.ToString();
         OpponentSum.text = Opponenttotal.ToString();
-
+        didPlayerWin = false;
+        didPlayerLose = false;
+        global = (GlobalControl)FindObjectOfType(typeof(GlobalControl));
         //AI = (AI_Player)FindObjectOfType(typeof(AI_Player));
     }
 
@@ -244,8 +251,8 @@ public class CardPick : MonoBehaviour
         if (Playertotal == Opponenttotal || (Playertotal > 21 && Opponenttotal > 21))
         {
             Message.gameObject.SetActive(true);
-            Message_Text.text = "Drol";
-            Debug.Log("Drol");
+            Message_Text.text = "Draw";
+            Debug.Log("Draw");
         }
         else if ((Playertotal <= 21 && Playertotal > Opponenttotal) || Opponenttotal > 21)
         {
@@ -269,12 +276,20 @@ public class CardPick : MonoBehaviour
             WinUI.gameObject.SetActive(true);
             ButtonAction.gameObject.SetActive(false);
 
-            if (PlayerHP == 0)
+            if (PlayerHP == 0 && didPlayerLose == false)
+            {
                 WhoWinText.text = "Opponent Win!";
-            else if(OpponentHP == 0)
+                didPlayerLose = true;
+                global.lost += 1;
+            }
+            else if (OpponentHP == 0 && didPlayerWin == false)
+            {
+                didPlayerWin = true;
                 WhoWinText.text = "Player Win!";
+                global.wins += 1;
+                global.xp += 4;
+            }
         }
-
         clearCard();
 
     }
